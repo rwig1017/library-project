@@ -1,15 +1,34 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Library csumb = new Library("CSUMB");
+        csumb.init("Library01.csv");
+        int numb = csumb.listBooks();
+        System.out.println("total books: " + numb);
+        numb = csumb.listReaders();
+
+        System.out.println("total readers: " + numb );
+        csumb.listShelves(true);
+
+        Book bestServedCold = new Book("12345","Best Served Cold","GrimDark",235,"Joe Abercrombie",LocalDate.now());
+        Shelf scifi = csumb.getShelf("sci-fi");
+        Shelf romance = csumb.getShelf(4);
+        romance = csumb.getShelf("Romance");
+        System.out.println(romance);
+        csumb.addShelf("Romance");
+        romance = csumb.getShelf("Romance");
+        System.out.println(romance);
+        scifi.addBook(bestServedCold);
+        csumb.addBook(bestServedCold);
+        csumb.addShelf("GrimDark");
+        System.out.println("Done");
+        csumb.listReaders(true);
+        csumb.listShelves(true);
+        Reader drew = csumb.getReaderByCard(1);
+        csumb.checkOutBook(drew,bestServedCold);
+        csumb.listReaders(true);
+        csumb.returnBook(drew,csumb.getBookByISBN("42-w-87"));
+        csumb.returnBook(drew,csumb.getBookByISBN("42-w-87"));
+
     }
 }
